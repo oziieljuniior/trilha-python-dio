@@ -6,18 +6,13 @@ from pathlib import Path
 # ==========================
 # Config / Leitura de dados
 # ==========================
-PATHGLOBAL = r"C:\Users\ozcon\Documents\WORK\DioCursos\EngenhariaDados\DesafioDIO\python_project\BD\usuarios&contas.csv"
-BD1 = pd.read_csv(
-    PATHGLOBAL,
-    sep=';',
-    dtype={
-        'CPF': 'string', 'Senha': 'string', 'Usuario': 'string',
-        'Limite': 'string', 'ExtratoMensal': 'string',
-        'Numero_Saques': 'string', 'Limite_Saques': 'string',
-        'Agencia': 'string', 'Conta': 'string'
-    },
-    keep_default_na=False
-)
+
+# Pega o diretório do arquivo .py em execução
+BASE_DIR = Path(__file__).resolve().parent
+PATHGLOBAL = BASE_DIR / "usuarios&contas.csv"
+
+# leitura
+BD1 = pd.read_csv(PATHGLOBAL, sep=';', dtype=str, keep_default_na=False)
 
 # Garante colunas mínimas e tipos para evitar quebras
 def _ensure_columns(df: pd.DataFrame):
@@ -278,3 +273,4 @@ while True:
 
     else:
         print("Opção inválida.")
+
